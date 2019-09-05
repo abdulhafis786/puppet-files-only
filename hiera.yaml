@@ -1,0 +1,24 @@
+#This hiera.yaml file is created to use the yaml in the backend and hierarchy as osfamily. 
+
+#The different yaml files for different Os family(in this case) has to be defined in first under the given datadir path. Ex at the below
+
+---
+:backends: yaml
+:yaml:
+  :datadir: '/etc/puppet/hieradata/'
+:hierarchy:
+  - "%{osfamily}"
+  - common
+:logger: console
+
+root@puppet:/etc/puppet/hieradata# more *
+::::::::::::::
+Debian.yaml
+::::::::::::::
+---
+sshservicename : ssh
+::::::::::::::
+RedHat.yaml
+::::::::::::::
+---
+sshservicename : sshd
