@@ -1,0 +1,16 @@
+# Using Tags in puppet modules.
+package { 'puppetserver':
+ensure => present,
+loglevel => warning,
+tag => ['package','puppet'],
+}
+
+service {'puppet':
+ensure => running,
+enable => true,
+tag => 'puppet',
+}
+
+To apply only the package resource use the puppet apply command as "puppet apply package.pp --tags package". --skip_tags is used when you want to neglet a particular tag during run. More thn one tag can be applied in a single command.
+
+------------------------------------------------------------------------------
