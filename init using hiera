@@ -1,0 +1,45 @@
+#This init.pp file uses Hiera included in it.
+
+$servicename = hiera("sshservicename")
+
+#Here the sshservicename is defined in the Oslevel Yaml files which gets replaced
+  package {'ssh':
+    ensure => installed,
+  }
+
+  #file {"/etc/ssh/ssh_config":
+   #ensure => file,
+   #owner => 'root',
+    #group => 'root',
+    #mode => '0644',
+    #notify => Service['$servicename'],
+  #}
+
+  service { $servicename:
+    ensure => running,
+    enable => true,
+  }
+
+---------------------------------------------------------------------
+
+#same setup for removing the content as well
+
+$servicename = hiera("sshservicename")
+
+  package {'ssh':
+    ensure => absent,
+  }
+
+  #file {"/etc/ssh/ssh_config":
+   #ensure => file,
+   #owner => 'root',
+    #group => 'root',
+    #mode => '0644',
+    #notify => Service['$servicename'],
+  #}
+
+  service { $servicename:
+    ensure => stopped,
+    enable => false,
+  }
+
