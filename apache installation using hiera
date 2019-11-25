@@ -1,0 +1,21 @@
+$ensure = hiera('httpd::package::ensure')
+$service = hiera('httpd::service')
+$enabled = hiera('httpd::status')
+
+package {'httpd':
+ ensure => $ensure,
+}
+
+service {'httpd':
+   ensure => $service,
+}
+
+
+----------------------------------------------------
+
+common.yaml configuration
+
+---
+httpd::package::ensure: latest
+httpd::status: true
+httpd::service: running
